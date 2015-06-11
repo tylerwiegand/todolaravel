@@ -12,7 +12,13 @@ class CreateTodosTable extends Migration
      */
     public function up()
     {
-        //
+		 Schema::create('todos', function(Blueprint $table) {
+			 $table->increments('id');
+			 $table->string('description');
+			 $table->integer('user_id')->unsigned();
+			 $table->foreign('user_id')->references('id')->on('users');
+			 $table->timestamps();
+		 });
     }
 
     /**
@@ -22,6 +28,6 @@ class CreateTodosTable extends Migration
      */
     public function down()
     {
-        //
-    }
+		 Schema::drop('todos');
+	 }
 }
